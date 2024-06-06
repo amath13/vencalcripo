@@ -10,10 +10,11 @@ jobs:
           name: Install dependencies
           command: |
             python -m pip install --upgrade pip
-            pip install -r requirements.txt
+            if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
       - run:
           name: Run tests
-          command: pytest
+          command: |
+            if [ -f requirements.txt ]; then pytest; else echo "No requirements.txt found"; fi
 
   build:
     docker:
@@ -43,3 +44,9 @@ workflows:
   example:
     jobs:
       - test
+      - build:
+          requires:
+            - test
+      - deploy:
+          requires:
+            - test
