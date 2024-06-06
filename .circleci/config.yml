@@ -3,7 +3,7 @@ version: 2.1
 jobs:
   test:
     docker:
-      - image: cimg/python:3.x  # Remplacez '3.x' par la version de Python que vous utilisez
+      - image: cimg/python:3.12.2
     steps:
       - checkout
       - run:
@@ -43,9 +43,3 @@ workflows:
   example:
     jobs:
       - test
-      - build:
-          requires:
-            - test
-      - deploy:
-          requires:
-            - test
