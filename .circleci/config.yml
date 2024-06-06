@@ -12,7 +12,7 @@ jobs:
       # Replace this with a real test runner invocation
       - run:
           name: Run tests
-          command: pip install -r requirements.txt
+          command: pytest test_main.py
   build:
     docker:
       - image: cimg/base:stable
